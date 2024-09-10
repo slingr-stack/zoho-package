@@ -11,26 +11,67 @@ This package allows you to connect to the Zoho service REST API. It has the foll
 
 ## Configuration
 
-These are the configuration parameters:
+Official documentation: https://www.zoho.com/books/api/v3/oauth/#overview
 
-### 
+### Registering New Client
 
-Name: apiKey
+You will have to first register your application with Zoho's Developer console in order get your Client ID and Client Secret.
+To register your application, go to https://accounts.zoho.com/developerconsole and click on App Self Client. 
+On successful registration, you will be provided with a set of OAuth 2.0 credentials such as a Client ID and Client Secret that,
+are known to both Zoho and your application. Do not share this credentials anywhere.
 
-This is . For more information on how to get it, please look at its documentation here.
+#### Client ID
+
+Name: clientId
+Type: text
+Mandatory: true
+
+#### Client Secret
+
+Name: clientSecret
+Type: password (text)
+Mandatory: true
+
+#### Organization ID
+
+Name: organizationId
+Type: text
+Mandatory: false
 
 # Javascript API
 
 ## HTTP requests
 You can make `GET`,`PUT`,`PATCH`,`DELETE` requests to the [Zoho API](https://www.zoho.com/books/api/v3/introduction/#organization-id) like this:
 ```javascript
-var response = pkg.zoho.api.get('/organizations');
-var response = pkg.zoho.api.get('/users/me');
-var response = pkg.zoho.api.post('/settings/currencies', 
+let response;
+response = pkg.zoho.api.get('/organizations');
+log(JSON.stringify(response));
+```
+
+```javascript
+let response;
+response = pkg.zoho.api.get('/users/me');
+log(JSON.stringify(response));
+```
+
+```javascript
+let response;
+response = pkg.zoho.api.post('/settings/currencies', 
     { "currency_code": "AUD", "currency_symbol": "$", "price_precision": 2, "currency_format": "1,234,567.89" });
-var response = pkg.zoho.api.put('/settings/currencies',
+log(JSON.stringify(response));
+```
+
+```javascript
+let response;
+response = pkg.zoho.api.put('/settings/currencies',
     { "currency_code": "AUD", "currency_symbol": "$", "price_precision": 2, "currency_format": "1,234,567.89" })
-var response = pkg.zoho.api.delete('/settings/currencies/982000000004012');
+log(JSON.stringify(response));
+```
+
+```javascript
+let response;
+response = pkg.zoho.api.delete('/settings/currencies/982000000004012');
+log(JSON.stringify(response));
 ```
 
 Please take a look at the documentation of the [HTTP service](https://github.com/slingr-stack/http-service)

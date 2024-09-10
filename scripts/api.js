@@ -20,7 +20,7 @@ function handleRequestWithRetry(requestFn, options, callbackData, callbacks) {
     try {
         return requestFn(options, callbackData, callbacks);
     } catch (error) {
-        if (e.additionalInfo.status === 401) {
+        if (error.additionalInfo.status === 401) {
             sys.logs.info("[zoho] Handling request...: "+ JSON.stringify(error));
             dependencies.oauth.functions.refreshToken('zoho:refreshToken');
             return requestFn(setAuthorization(options), callbackData, callbacks);
