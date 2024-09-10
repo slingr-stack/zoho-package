@@ -16,7 +16,7 @@ Official documentation: [https://www.zoho.com/books/api/v3/oauth/#overview](http
 ### Registering New Client
 
 You will have to first register your application with Zoho's Developer console in order get your Client ID and Client Secret.
-To register your application, go to [https://accounts.zoho.com/developerconsole](https://accounts.zoho.com/developerconsole) and click on App Self Client. 
+To register your application, go to [https://accounts.zoho.com/developerconsole](https://accounts.zoho.com/developerconsole) and click on Server-based Applications. 
 On successful registration, you will be provided with a set of OAuth 2.0 credentials such as a Client ID and Client Secret that,
 are known to both Zoho and your application. Do not share this credentials anywhere.
 
@@ -41,7 +41,11 @@ are known to both Zoho and your application. Do not share this credentials anywh
 # Javascript API
 
 ## HTTP requests
-You can make `GET`,`PUT`,`PATCH`,`DELETE` requests to the [Zoho API](https://www.zoho.com/books/api/v3/introduction/#organization-id) like this:
+You can make `GET`,`POST`,`PUT`,`DELETE` requests to the [Zoho API](https://www.zoho.com/books/api/v3/introduction/#organization-id) like this:
+
+```javascript
+pkg.zoho.api.getAccessToken();
+```
 
 ```javascript
 let response;
@@ -57,21 +61,14 @@ log(JSON.stringify(response));
 
 ```javascript
 let response;
-response = pkg.zoho.api.post('/settings/currencies', 
-    { "currency_code": "AUD", "currency_symbol": "$", "price_precision": 2, "currency_format": "1,234,567.89" });
+response = pkg.zoho.api.post('/settings/currencies',
+    {body: { "effective_date": "2013-09-04", "rate": 1.23 }}); // use a valid JSON object here
 log(JSON.stringify(response));
 ```
 
 ```javascript
 let response;
-response = pkg.zoho.api.put('/settings/currencies',
-    { "currency_code": "AUD", "currency_symbol": "$", "price_precision": 2, "currency_format": "1,234,567.89" })
-log(JSON.stringify(response));
-```
-
-```javascript
-let response;
-response = pkg.zoho.api.delete('/settings/currencies/982000000004012');
+response = pkg.zoho.api.delete('/settings/currencies/982000000004012'); // use a valid id here
 log(JSON.stringify(response));
 ```
 
