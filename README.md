@@ -11,37 +11,38 @@ This package allows you to connect to the Zoho service REST API. It has the foll
 
 ## Configuration
 
-Official documentation: https://www.zoho.com/books/api/v3/oauth/#overview
+Official documentation: [https://www.zoho.com/books/api/v3/oauth/#overview](https://www.zoho.com/books/api/v3/oauth/#overview)
 
 ### Registering New Client
 
 You will have to first register your application with Zoho's Developer console in order get your Client ID and Client Secret.
-To register your application, go to https://accounts.zoho.com/developerconsole and click on App Self Client. 
+To register your application, go to [https://accounts.zoho.com/developerconsole](https://accounts.zoho.com/developerconsole) and click on App Self Client. 
 On successful registration, you will be provided with a set of OAuth 2.0 credentials such as a Client ID and Client Secret that,
 are known to both Zoho and your application. Do not share this credentials anywhere.
 
 #### Client ID
 
-Name: clientId
-Type: text
-Mandatory: true
+**Name**: clientId
+**Type**: text
+**Mandatory**: true
 
 #### Client Secret
 
-Name: clientSecret
-Type: password (text)
-Mandatory: true
+**Name**: clientSecret
+**Type**: password (text)
+**Mandatory**: true
 
 #### Organization ID
 
-Name: organizationId
-Type: text
-Mandatory: false
+**Name**: organizationId
+**Type**: text
+**Mandatory**: false
 
 # Javascript API
 
 ## HTTP requests
 You can make `GET`,`PUT`,`PATCH`,`DELETE` requests to the [Zoho API](https://www.zoho.com/books/api/v3/introduction/#organization-id) like this:
+
 ```javascript
 let response;
 response = pkg.zoho.api.get('/organizations');
