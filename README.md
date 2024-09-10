@@ -3,7 +3,7 @@
 
 Repo: [https://github.com/slingr-stack/zoho-package](https://github.com/slingr-stack/zoho-package)
 
-This package allows you to connect to the Zoho service REST API. It has the following features:
+This [package](https://platform-docs.slingr.io/dev-reference/data-model-and-logic/packages/) allows you to connect to the Zoho service REST API. It has the following features:
 
 - Authentication through API key
 - Direct access to the API
