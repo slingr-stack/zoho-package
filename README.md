@@ -77,7 +77,7 @@ for more information about generic requests.
 
 ## Dependencies
 * HTTP Service
-* Oauth Package (v1.0.31)
+* Oauth Package
 
 ## About SLINGR
 
