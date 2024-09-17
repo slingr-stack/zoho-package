@@ -1,77 +1,84 @@
 {
-    "name": "skeleton",
-    "label": "Skeleton Package",
+    "name": "zoho",
+    "label": "Zoho",
     "dependencies": [
         {
             "type": "service",
             "name": "http",
-            "version": "v1.6.3",
+            "version": "v1.7.0",
             "instanceId": "shared"
         },
         {
             "type": "package",
             "name": "oauth",
-            "version": "v1.0.24"
+            "version": "v1.0.31"
         }
     ],
     "configurationBuilder": "/configurationBuilder.js",
     "configuration": [
         {
-            "name": "SKELETON_API_BASE_URL",
-            "label": "Skeleton Api Url",
-            "type": "label",
-            "value": "https://example.com/"
-        },
-        {
-            "name": "choice",
-            "label": "Choice",
-            "required": false,
-            "defaultValue": "true",
+            "name": "ZOHO_OAUTH_API_BASE_URL",
+            "label": "Zoho Oauth API url",
             "type": "buttonsGroup",
+            "required": true,
+            "defaultValue": "https://accounts.zoho.com/",
             "typeOptions": {
                 "allowCustom": true,
                 "possibleValues": [
                     {
-                        "label": "True",
-                        "name": "true"
+                        "label": "United States Domain: .com",
+                        "name": "https://accounts.zoho.com"
                     },
                     {
-                        "label": "False",
-                        "name": "false"
+                        "label": "Europe Domain: .eu",
+                        "name": "https://accounts.zoho.eu"
                     },
                     {
-                        "label": "Other",
-                        "name": "other"
+                        "label": "India Domain: .in",
+                        "name": "https://accounts.zoho.in"
+                    },
+                    {
+                        "label": "Australia Domain .com.au",
+                        "name": "https://accounts.zoho.com.au"
+                    },
+                    {
+                        "label": "Japan Domain: .jp",
+                        "name": "https://accounts.zoho.jp"
+                    },
+                    {
+                        "label": "Canada Domain: .ca",
+                        "name": "https://accounts.zohocloud.ca"
                     }
                 ]
             }
         },
         {
-            "name": "text",
-            "label": "Text",
+            "name": "clientId",
+            "label": "Client ID",
             "type": "text",
-            "required": "false",
-            "visibility": "config.choice == 'true'"
+            "required": true
         },
         {
-            "name": "info",
-            "label": "info",
+            "name": "clientSecret",
+            "label": "Client Secret",
+            "type": "password",
+            "required": true
+        },
+        {
+            "name": "organizationId",
+            "label": "Organization ID",
+            "type": "text",
+            "required": false
+        },
+        {
+            "name": "oauthCallback",
+            "label": "OAuth callback",
+            "description": "The OAuth callback to configure in your Zoho App",
             "type": "label",
-            "value": "'info'"
+            "value": "config.AUTH_CALLBACK_URL+'/authCallback'"
         }
     ],
-    "events": [
-        {
-            "label": "Webhook",
-            "name": "webhook",
-            "description": "Event triggered when there is a webhook coming from PandaDoc."
-        },
-        {
-            "label": "Callback",
-            "name": "callback",
-            "description": "Happens when a async process is finished"
-        }
-    ],
+    "events": [],
     "metadata": [
         {
             "type": "script",
@@ -79,24 +86,9 @@
             "path": "/scripts/api.js"
         },
         {
-            "type": "listener",
-            "namespace": "webhook",
-            "path": "/listeners/webhook.js"
-        },
-        {
-            "type": "flowStep",
-            "namespace": "apiCallSkeleton",
-            "path": "/flowSteps/apiCallSkeleton"
-        },
-        {
-            "type": "flowStep",
-            "namespace": "customFlow",
-            "path": "/flowSteps/customFlow"
-        },
-        {
-            "type": "uiService",
-            "namespace": "testUiService",
-            "path": "/uiServices/testUiService"
+            "type": "script",
+            "namespace": "utils",
+            "path": "/scripts/utils.js"
         }
     ]
 }
