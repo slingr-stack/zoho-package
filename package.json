@@ -11,7 +11,7 @@
         {
             "type": "package",
             "name": "oauth",
-            "version": "v1.0.31"
+            "version": "v1.0.32"
         }
     ],
     "configurationBuilder": "/configurationBuilder.js",
