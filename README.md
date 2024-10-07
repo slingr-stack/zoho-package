@@ -49,9 +49,9 @@ are known to both Zoho and your application. Do not share this credentials anywh
 **Type**: text
 **Mandatory**: false
 
-# Javascript api
+# Javascript API
 
-## Http requests
+## HTTP requests
 You can make `GET`,`POST`,`PUT`,`DELETE` requests to the [Zoho API](https://www.zoho.com/books/api/v3/introduction/#organization-id) like this:
 
 ### Login
@@ -67,7 +67,7 @@ pkg.zoho.api.getAccessToken();
 This opens a pop-up that allows each user to log in with their credentials and link it to their User ID.
 Each request made by that user will have an Authorization header with his token (the requests can be seen in the Logger of the app's Monitor).
 
-### Use the api
+### Use the API
 
 This request allows you to obtain your organization ID.
 
@@ -112,7 +112,7 @@ for more information about generic requests.
 * HTTP Service
 * Oauth Package
 
-## About slingr
+## About Slingr
 
 SLINGR is a low-code rapid application development platform that speeds up development,
 with robust architecture for integrations and executing custom workflows and automation.
