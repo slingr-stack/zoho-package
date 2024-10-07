@@ -22,7 +22,7 @@ It has the following features:
 
 Official documentation: [https://www.zoho.com/books/api/v3/oauth/#overview](https://www.zoho.com/books/api/v3/oauth/#overview)
 
-### Registering New Client
+### Registering new client
 
 In order to use this package you must first configure the integration to authenticate with the zoho system that uses the OAuth2.0 standard.
 
@@ -31,27 +31,27 @@ To register your application, go to [https://accounts.zoho.com/developerconsole]
 On successful registration, you will be provided with a set of OAuth 2.0 credentials such as a Client ID and Client Secret that,
 are known to both Zoho and your application. Do not share this credentials anywhere.
 
-#### Client ID
+#### Client id
 
 **Name**: clientId
 **Type**: text
 **Mandatory**: true
 
-#### Client Secret
+#### Client secret
 
 **Name**: clientSecret
 **Type**: password (text)
 **Mandatory**: true
 
-#### Organization ID
+#### Organization id
 
 **Name**: organizationId
 **Type**: text
 **Mandatory**: false
 
-# Javascript API
+# Javascript api
 
-## HTTP requests
+## Http requests
 You can make `GET`,`POST`,`PUT`,`DELETE` requests to the [Zoho API](https://www.zoho.com/books/api/v3/introduction/#organization-id) like this:
 
 ### Login
@@ -67,7 +67,7 @@ pkg.zoho.api.getAccessToken();
 This opens a pop-up that allows each user to log in with their credentials and link it to their User ID.
 Each request made by that user will have an Authorization header with his token (the requests can be seen in the Logger of the app's Monitor).
 
-### Use the API
+### Use the api
 
 This request allows you to obtain your organization ID.
 
@@ -112,7 +112,7 @@ for more information about generic requests.
 * HTTP Service
 * Oauth Package
 
-## About SLINGR
+## About slingr
 
 SLINGR is a low-code rapid application development platform that speeds up development,
 with robust architecture for integrations and executing custom workflows and automation.
