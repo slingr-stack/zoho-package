@@ -57,7 +57,7 @@ exports.getAccessToken = function () {
  */
 exports.removeAccessToken = function () {
     sys.logs.info("[zoho] Removing access token from oauth");
-    httpService.get({url: config.get("ZOHO_OAUTH_API_BASE_URL")+"/oauth/v2/token/revoke?token=" + sys.storage.get('installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id() + ' - access_token', {decrypt:true})});
+    httpService.get({url: config.get("ZOHO_OAUTH_API_BASE_URL")+"/oauth/v2/token/revoke?token=" + sys.storage.get('installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id() + ' - refresh_token', {decrypt:true})});
     return dependencies.oauth.functions.disconnectUser('zoho:disconnectUser');
 }
 
