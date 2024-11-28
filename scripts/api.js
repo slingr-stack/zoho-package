@@ -22,7 +22,7 @@ function handleRequestWithRetry(requestFn, options, callbackData, callbacks) {
     } catch (error) {
         if (error.additionalInfo.status === 401) {
             sys.logs.info("[zoho] Handling request...: "+ JSON.stringify(error));
-            dependencies.oauth.functions.refreshToken('zoho:refreshToken');
+            httpService.post({url: config.get("ZOHO_OAUTH_API_BASE_URL")+"/oauth/v2/token?refresh_token=" + sys.storage.get('installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id() + ' - refresh_token', {decrypt:true})});
             return requestFn(setAuthorization(options), callbackData, callbacks);
         } else {
             throw error;
