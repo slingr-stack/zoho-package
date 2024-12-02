@@ -22,7 +22,12 @@ function handleRequestWithRetry(requestFn, options, callbackData, callbacks) {
     } catch (error) {
         if (error.additionalInfo.status === 401) {
             sys.logs.info("[zoho] Handling request...: "+ JSON.stringify(error));
-            dependencies.oauth.functions.refreshToken('zoho:refreshToken');
+            const actualRefreshToken = sys.storage.get('installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id() + ' - refresh_token', {decrypt:true});
+            const url = config.get("ZOHO_OAUTH_API_BASE_URL")+"/oauth/v2/token?refresh_token=" + actualRefreshToken + "&client_id=" + config.get("clientId") + "&client_secret=" + config.get("clientSecret") + "&redirect_uri=" + config.get("oauthCallback") + "&grant_type=refresh_token";
+            const accessTokenResponse = httpService.post({url: url});
+            if (!!accessTokenResponse && !!accessTokenResponse.access_token) {
+                sys.storage.put('installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id() + ' - access_token', accessTokenResponse.access_token, {encrypt: true});
+            }
             return requestFn(setAuthorization(options), callbackData, callbacks);
         } else {
             throw error;
