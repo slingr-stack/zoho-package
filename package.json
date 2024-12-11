@@ -71,6 +71,11 @@
             "required": false
         },
         {
+            "name": "oauthAccountId",
+            "label": "OAuth Account ID",
+            "type": "text"
+        },
+        {
             "name": "oauthCallback",
             "label": "OAuth callback",
             "description": "The OAuth callback to configure in your Zoho App",

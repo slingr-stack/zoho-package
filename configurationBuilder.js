@@ -7,7 +7,7 @@
 
 let configurationBuilder = function (config) {
     config.oauth = {
-        id: 'installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id(),
+        id: config.oauthAccountId || 'installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id(),
         authUrl: config.ZOHO_OAUTH_API_BASE_URL + "/oauth/v2/auth",
         accessTokenUrl: config.ZOHO_OAUTH_API_BASE_URL + "/oauth/v2/token",
         clientId: config.clientId,
