@@ -13,6 +13,8 @@ let httpDependency = {
 
 let httpService = {};
 
+const oauthAccountId = config.get('oauthAccountId') || ('installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id());
+
 /**
  * Handles a request with retry from the platform side.
  */
@@ -22,11 +24,11 @@ function handleRequestWithRetry(requestFn, options, callbackData, callbacks) {
     } catch (error) {
         if (error.additionalInfo.status === 401) {
             sys.logs.info("[zoho] Handling request...: "+ JSON.stringify(error));
-            const actualRefreshToken = sys.storage.get('installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id() + ' - refresh_token', {decrypt:true});
+            const actualRefreshToken = sys.storage.get(oauthAccountId + ' - refresh_token', {decrypt:true});
             const url = config.get("ZOHO_OAUTH_API_BASE_URL")+"/oauth/v2/token?refresh_token=" + actualRefreshToken + "&client_id=" + config.get("clientId") + "&client_secret=" + config.get("clientSecret") + "&redirect_uri=" + config.get("oauthCallback") + "&grant_type=refresh_token";
             const accessTokenResponse = httpService.post({url: url});
             if (!!accessTokenResponse && !!accessTokenResponse.access_token) {
-                sys.storage.put('installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id() + ' - access_token', accessTokenResponse.access_token, {encrypt: true});
+                sys.storage.put(oauthAccountId + ' - access_token', accessTokenResponse.access_token, {encrypt: true});
             }
             return requestFn(setAuthorization(options), callbackData, callbacks);
         } else {
@@ -62,7 +64,7 @@ exports.getAccessToken = function () {
  */
 exports.removeAccessToken = function () {
     sys.logs.info("[zoho] Removing access token from oauth");
-    httpService.get({url: config.get("ZOHO_OAUTH_API_BASE_URL")+"/oauth/v2/token/revoke?token=" + sys.storage.get('installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id() + ' - refresh_token', {decrypt:true})});
+    httpService.get({url: config.get("ZOHO_OAUTH_API_BASE_URL")+"/oauth/v2/token/revoke?token=" + sys.storage.get(oauthAccountId + ' - refresh_token', {decrypt:true})});
     return dependencies.oauth.functions.disconnectUser('zoho:disconnectUser');
 }
 
@@ -198,7 +200,7 @@ function setAuthorization(options) {
     let authorization = options.authorization || {};
     authorization = mergeJSON(authorization, {
         type: "oauth2",
-        accessToken: sys.storage.get('installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id() + ' - access_token', {decrypt:true}),
+        accessToken: sys.storage.get(oauthAccountId + ' - access_token', {decrypt:true}),
         headerPrefix: "Zoho-oauthtoken"
     });
     options.authorization = authorization;
