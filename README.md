@@ -33,25 +33,25 @@ are known to both Zoho and your application. Do not share this credentials anywh
 
 #### Client id
 
-**Name**: clientId
+**Name**: `clientId`
 **Type**: text
 **Mandatory**: true
 
 #### Client secret
 
-**Name**: clientSecret
+**Name**: `clientSecret`
 **Type**: password (text)
 **Mandatory**: true
 
 #### Organization id
 
-**Name**: organizationId
+**Name**: `organizationId`
 **Type**: text
 **Mandatory**: false
 
 #### OAuth Account ID
 
-**Name**: oauthAccountId
+**Name**: `oauthAccountId`
 **Type**: text
 **Mandatory**: false
 
