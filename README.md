@@ -51,6 +51,8 @@ are known to both Zoho and your application. Do not share this credentials anywh
 
 #### OAuth Account ID
 
+Used to connect with a single account to zoho services.
+
 **Name**: `oauthAccountId`
 **Type**: text
 **Mandatory**: false
