@@ -15,7 +15,8 @@ let httpDependency = {
 
 let httpService = {};
 
-const oauthAccountId = config.get('oauthAccountId') || ('installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id());
+const userRecord = sys.context.getCurrentUserRecord();
+const oauthAccountId = config.get('oauthAccountId') || ('installationInfo-Zoho-User-'+ (userRecord ? userRecord.id() : 'unknownUser'));
 
 /**
  * Handles a request with retry from the platform side.

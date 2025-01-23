@@ -6,8 +6,9 @@
  ****************************************************/
 
 let configurationBuilder = function (config) {
+    const userRecord = sys.context.getCurrentUserRecord();
     config.oauth = {
-        id: config.oauthAccountId || 'installationInfo-Zoho-User-'+sys.context.getCurrentUserRecord().id(),
+        id: config.oauthAccountId || 'installationInfo-Zoho-User-'+ (userRecord ? userRecord.id() : 'unknownUser'),
         authUrl: config.ZOHO_OAUTH_API_BASE_URL + "/oauth/v2/auth",
         accessTokenUrl: config.ZOHO_OAUTH_API_BASE_URL + "/oauth/v2/token",
         clientId: config.clientId,
