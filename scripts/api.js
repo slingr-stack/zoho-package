@@ -28,7 +28,7 @@ function _initConfig() {
 function handleRequestWithRetry(requestFn, options, callbackData, callbacks) {
     try {
 
-        if(Object.keys(userRecord).length == 0 || oauthAccountId) {
+        if(Object.keys(userRecord).length == 0 || !oauthAccountId) {
             _initConfig();
         }
 
@@ -76,7 +76,7 @@ exports.getAccessToken = function () {
  */
 exports.removeAccessToken = function () {
 
-    if(Object.keys(userRecord).length == 0 || oauthAccountId) {
+    if(Object.keys(userRecord).length == 0 || !oauthAccountId) {
         _initConfig();
     }
 
@@ -214,7 +214,7 @@ function setRequestHeaders(options) {
 
 function setAuthorization(options) {
 
-    if(Object.keys(userRecord).length == 0 || oauthAccountId) {
+    if(Object.keys(userRecord).length == 0 || !oauthAccountId) {
         _initConfig();
     }
 
