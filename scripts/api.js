@@ -14,15 +14,24 @@ let httpDependency = {
 };
 
 let httpService = {};
+let userRecord = {};
+let oauthAccountId = "";
 
-const userRecord = sys.context.getCurrentUserRecord();
-const oauthAccountId = config.get('oauthAccountId') || ('installationInfo-Zoho-User-'+ (userRecord ? userRecord.id() : 'unknownUser'));
+function _initConfig() {
+    userRecord = sys.context.getCurrentUserRecord();
+    oauthAccountId = config.get('oauthAccountId') || ('installationInfo-Zoho-User-'+ (userRecord ? userRecord.id() : 'unknownUser'))
+}
 
 /**
  * Handles a request with retry from the platform side.
  */
 function handleRequestWithRetry(requestFn, options, callbackData, callbacks) {
     try {
+
+        if(Object.keys(userRecord).length == 0 || oauthAccountId) {
+            _initConfig();
+        }
+
         return requestFn(options, callbackData, callbacks);
     } catch (error) {
         if (error.additionalInfo.status === 401) {
@@ -66,6 +75,11 @@ exports.getAccessToken = function () {
  * @return {void} The access token removed on the storage.
  */
 exports.removeAccessToken = function () {
+
+    if(Object.keys(userRecord).length == 0 || oauthAccountId) {
+        _initConfig();
+    }
+
     sys.logs.info("[zoho] Removing access token from oauth");
     httpService.get({url: config.get("ZOHO_OAUTH_API_BASE_URL")+"/oauth/v2/token/revoke?token=" + sys.storage.get(oauthAccountId + ' - refresh_token', {decrypt:true})});
     return dependencies.oauth.functions.disconnectUser('zoho:disconnectUser');
@@ -199,6 +213,11 @@ function setRequestHeaders(options) {
 }
 
 function setAuthorization(options) {
+
+    if(Object.keys(userRecord).length == 0 || oauthAccountId) {
+        _initConfig();
+    }
+
     sys.logs.debug('[zoho] Setting header token oauth');
     let authorization = options.authorization || {};
     authorization = mergeJSON(authorization, {
